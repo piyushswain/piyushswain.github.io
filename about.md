@@ -4,12 +4,20 @@ title: About
 permalink: /about/
 ---
 
-Some information about you!
+Hi, I'm Piyush Swain
 
-### More Information
+I'm a Software Engineer and a Gaming Enthusiast
 
-A place to include any other types of information that you'd like to include about yourself.
+I work as a Full Stack Developer at eLitmus Evaluation. Apart from my work, I just keep scouring the web looking for the most obscure knowledge I can find.
 
-### Contact me
+## More Information
 
-[email@domain.com](mailto:email@domain.com)
+Avid Football fan and casual player
+
+Liverpool FC for life
+
+From FIFA to Total War and Assasins Creed to Call of Duty, I have played almost everything in between
+
+## Contact me
+
+[piyush.swain3@gmail.com](mailto:piyush.swain3@gmail.com)

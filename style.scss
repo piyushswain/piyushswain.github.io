@@ -9,6 +9,11 @@
 @import "variables";
 // Syntax highlighting @import is at the bottom of this file
 
+/*************/
+/* VARIABLES */
+/*************/
+// $base-color: ;
+
 /**************/
 /* BASE RULES */
 /**************/
@@ -21,13 +26,21 @@ body {
 	background: $white;
   font: 18px/1.4 $helvetica;
   color: $darkGray;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .container {
   margin: 0 auto;
-  max-width: 740px;
-  padding: 0 10px;
+  max-width: 70vw;
+  padding: 0 1rem;
   width: 100%;
+
+  @include mobile {
+    max-width: 100vw;
+  }
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -151,12 +164,12 @@ img {
 //
 
 .wrapper-masthead {
+  border-bottom: 1px solid $lightGray;
   margin-bottom: 50px;
 }
 
 .masthead {
   padding: 20px 0;
-  border-bottom: 1px solid $lightGray;
 
   @include mobile {
     text-align: center;
