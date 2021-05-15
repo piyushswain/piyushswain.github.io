@@ -175,6 +175,10 @@ img {
 .masthead {
   padding: 20px 0;
 
+  p {
+    text-align: center !important;
+  }
+
   @include mobile {
     text-align: center;
   }
