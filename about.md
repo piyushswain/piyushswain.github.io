@@ -4,18 +4,12 @@ title: About
 permalink: /about/
 ---
 
-Hi, I'm Piyush Swain
+I am a **Web Developer**. I started coding in 2012 to create mods for my favourite games at the time. I am currently learning about UX Design and it's importance on the modern web. My goal is to help create and develop software that positively impacts millions of people.
 
-I'm a Software Engineer and a Gaming Enthusiast
+I have a Bachelor's degree in Computer Science Engineering which I completed in 2019. I currently work as a **Full Stack Developer** at an organization called "eLitmus Evaluation" in **Bangalore, India** which connects the best candidates with the best companies to give them both excellent professional opportunites.
 
-I work as a Full Stack Developer at eLitmus Evaluation. Apart from my work, I keep scouring the web looking for the most obscure knowledge I can find.
+I have a small team here and we work on web applications with varied uses ranging from a candidate portal to find jobs to an online testing and coding platform.
 
-## Know More
+When I'm not working, I would generally be scouring the web for information on some obscure topic that has caught my fantasy or playing some game on my PC. From FIFA to Total War and Assasins Creed to Call of Duty, I have played almost anything and everything in between.
 
-Avid Football fan and casual player (Liverpool FC for life)
-
-From FIFA to Total War and Assasins Creed to Call of Duty, I have played almost everything in between
-
-## Contact me
-
-[piyush.swain3@gmail.com](mailto:piyush.swain3@gmail.com)
+Also, I am an avid Football fan and a casual football player (Liverpool FC for life)
