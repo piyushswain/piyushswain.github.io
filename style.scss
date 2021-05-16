@@ -9,13 +9,6 @@
 @import "variables";
 // Syntax highlighting @import is at the bottom of this file
 
-/*************/
-/* VARIABLES */
-/*************/
-$base-color: #c8102E;
-$off-white: #eee;
-$shadow-gray: #999;
-
 /**************/
 /* BASE RULES */
 /**************/
@@ -26,7 +19,7 @@ html {
 
 body {
 	background: $white;
-  font: 18px/1.4 $helvetica;
+  font: 18px/1.4 $georgia;
   color: $darkGray;
   min-height: 100vh;
   display: flex;
@@ -60,18 +53,24 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-size: 30px;
+  font-size: 36px;
   a {
     color: inherit;
   }
 }
 
 h2 {
-  font-size: 24px;
+  font-size: 26px;
+  a {
+    color: inherit;
+  }
 }
 
 h3 {
   font-size: 20px;
+  a {
+    color: inherit;
+  }
 }
 
 h4 {
@@ -168,8 +167,8 @@ img {
 
 .wrapper-masthead {
   margin-bottom: 50px;
-  background-color: $base-color;
-  box-shadow: 2px 2px 5px 5px $shadow-gray;
+  background-color: $baseRed;
+  box-shadow: 2px 2px 5px 5px $shadowGray;
 }
 
 .masthead {
@@ -232,7 +231,7 @@ img {
 
 .site-description {
   margin: -5px 0 0 0;
-  color: $off-white;
+  color: $offWhite;
   font-size: 16px;
   font-weight: 500;
 
@@ -256,18 +255,18 @@ nav {
 
   a {
     margin-left: 20px;
-    color: $off-white;
+    color: $offWhite;
     text-align: right;
     font-weight: 500;
     letter-spacing: 1px;
     &:hover, &:active {
-      color: $off-white;
+      color: $offWhite;
       text-decoration: underline;
     }
 
     @include mobile {
       margin: 0 10px;
-      color: $off-white;
+      color: $offWhite;
     }
   }
 }
@@ -275,6 +274,15 @@ nav {
 //
 // .main
 //
+.page {
+  max-width: 60vw;
+  margin: auto;
+
+  @include mobile {
+    max-width: 80vw;
+  }
+}
+
 .posts {
   max-width: 60vw;
   margin: auto;
@@ -319,6 +327,24 @@ nav {
   }
 }
 
+.entry > p {
+  line-height: 32px;
+  font-size: 21px;
+  font-family: $georgia;
+
+  @include mobile {
+    line-height: 28px;
+    font-size: 18px;
+  }
+}
+
+.page > .entry > p {
+  font-size: 1rem;
+  letter-spacing: -0.003rem;
+  line-height: 1.4rem;
+  font-family: $georgia;
+}
+
 .wrapper-footer {
   margin-top: 50px;
   border-top: 1px solid #ddd;
@@ -331,7 +357,106 @@ footer {
   text-align: center;
 }
 
+/*************/
+/* Home Page */
+/*************/
+
+.introduction {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  min-height: 40vh;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.quick-links {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.work {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+  margin-top: 2rem;
+  font-size: 1rem !important;
+}
+
+.open-source {
+  flex: 0 0 33.33%;
+  max-width: 33.33%;
+  text-align: center;
+  border-left: 1px solid $lightGray;
+  border-right: 1px solid $lightGray;
+  padding: 0.2rem 0.6rem;
+
+  @include mobile {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+
+.personal-projects {
+  flex: 0 0 33.33%;
+  max-width: 33.33%;
+  text-align: center;
+  border-left: 1px solid $lightGray;
+  border-right: 2px solid $lightGray;
+  padding: 0.2rem 0.6rem;
+
+  @include mobile {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+
+.professional-career {
+  flex: 0 0 33.33%;
+  max-width: 33.33%;
+  text-align: center;
+  border-left: 2px solid $lightGray;
+  border-right: 1px solid $lightGray;
+  padding: 0.2rem 0.6rem;
+
+  @include mobile {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+
+/********************/
+/* Specific Classes */
+/********************/
+
+.bold {
+  font-weight: 600;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 600;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+img.work-logo {
+  width: 32px;
+  height: 32px;
+  vertical-align: middle;
+}
+
 // Settled on moving the import of syntax highlighting to the bottom of the CSS
 // ... Otherwise it really bloats up the top of the CSS file and makes it difficult to find the start
 @import "highlights";
 @import "svg-icons";
+@import "buttons";
