@@ -31,7 +31,7 @@ Now, both of these components need to be as good as the other one to ensure that
 
 ### Identify the Issue
 
-I knew I wanted to change this platform, but it was important to focus on a few specifics instead of getting bogged down by all the things I wanted to improve. So, I sat down with my colleague [Shubham Pandey](shubhampandey.in) (Please do checkout his blog and website. He has some amazing stuff on there) and we tried to categorise the problems in the platform under a few broad umbrellas.
+I knew I wanted to change this platform, but it was important to focus on a few specifics instead of getting bogged down by all the things I wanted to improve. So, I sat down with my colleague [Shubham Pandey](https://www.shubhampandey.in) (Please do checkout his blog and website. He has some amazing stuff on there) and we tried to categorise the problems in the platform under a few broad umbrellas.
 
 **Experience** - We used this category to encompass all the problems that were related to causing an inconvenience to the user who was using our platform.
 Some of the problems we put under this category were things like the user not being able to see the list of problems while coding, the user's event time starting before they can see the editor, not being able to see the result and the problem statement at one time and a few more things similar to these problems.
