@@ -60,14 +60,14 @@ h1 {
 }
 
 h2 {
-  font-size: 26px;
+  font-size: 30px;
   a {
     color: inherit;
   }
 }
 
 h3 {
-  font-size: 20px;
+  font-size: 24px;
   a {
     color: inherit;
   }
@@ -125,7 +125,15 @@ img {
   max-width: 100%;
 }
 
+figcaption {
+  color: $slateGray;
+  font-size: 1rem !important;
+}
+
 // Fixes images in popup boxes from Google Translate
+figure.image {
+  text-align: center;
+}
 .gmnoprint img {
   max-width: none;
 }
@@ -166,7 +174,6 @@ img {
 //
 
 .wrapper-masthead {
-  margin-bottom: 50px;
   background-color: $baseRed;
   box-shadow: 2px 2px 5px 5px $shadowGray;
 }
@@ -289,6 +296,10 @@ nav {
   .post {
     padding-bottom: 2em;
     border-bottom: 1px solid $lightGray;
+    .entry {
+      margin-bottom: 0;
+      border: 0;
+    }
   }
 
   .post:last-child {
@@ -322,6 +333,11 @@ nav {
     font-size: 15px;
   }
 
+  .entry {
+    margin-bottom: 4rem;
+    border-bottom: 2px solid $lightGray;
+  }
+
   @include mobile {
     max-width: 80vw;
   }
@@ -334,6 +350,22 @@ nav {
 
   @include mobile {
     line-height: 28px;
+    font-size: 18px;
+  }
+}
+
+.entry > ol {
+  font-size: 21px;
+
+  @include mobile {
+    font-size: 18px;
+  }
+}
+
+.entry > ul {
+  font-size: 21px;
+
+  @include mobile {
     font-size: 18px;
   }
 }
@@ -447,6 +479,10 @@ footer {
 
 .text-left {
   text-align: left;
+}
+
+.post-footer {
+  margin-top: 3rem;
 }
 
 img.work-logo {
