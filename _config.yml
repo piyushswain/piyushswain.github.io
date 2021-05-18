@@ -67,6 +67,14 @@ kramdown:
     # Use existing pygments syntax highlighting css
     css_class: 'highlight'
 
+defaults:
+  -
+    values:
+      image:
+        path: https://avatars.githubusercontent.com/u/25799316?v=4
+        height: 100
+        width: 100
+
 # Set the Sass partials directory, as we're using @imports
 sass:
   style: :expanded # You might prefer to minify using :compressed
