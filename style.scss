@@ -377,6 +377,14 @@ nav {
   font-family: $georgia;
 }
 
+.page > .entry > ul {
+  font-size: 1rem;
+}
+
+.page > .entry > ol {
+  font-size: 1rem;
+}
+
 .wrapper-footer {
   margin-top: 50px;
   border-top: 1px solid #ddd;
