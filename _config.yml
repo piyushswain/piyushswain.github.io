@@ -5,6 +5,10 @@
 # Name of your site (displayed in the header)
 name: Piyush Swain
 
+# Explicit site title for jekyll-seo-tag (falls back to `name` if unset,
+# but SEO plugins/tools generally expect `title` specifically)
+title: Piyush Swain
+
 # Short Description (displayed in the header)
 short_description: Software Engineer | Tech Enthusiast
 
@@ -28,7 +32,7 @@ footer-links:
   instagram:
   linkedin: piyush-swain-199406185
   pinterest:
-  twitter: PiyushSwain3
+  twitter:
   stackoverflow: # your stackoverflow profile, e.g. "users/50476/bart-kiers"
   youtube: # channel/<your_long_string> or user/<user-name>
   googleplus: # anything in your profile username that comes after plus.google.com/
@@ -74,9 +78,9 @@ defaults:
   -
     values:
       image:
-        path: https://avatars.githubusercontent.com/u/25799316?v=4
-        height: 100
-        width: 100
+        path: https://piyushswain.github.io/images/piyush.png
+        height: 460
+        width: 460
 
 # Set the Sass partials directory, as we're using @imports
 sass:
