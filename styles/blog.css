@@ -2,49 +2,101 @@
    blog.css — blog listing (blog.html) and every individual post
    (_layouts/post.html). One shared stylesheet so every post looks and
    behaves the same, instead of styling being duplicated per post.
+   Long-form reading text stays serif at a generous size/line-height —
+   that's a deliberate, separate choice from the sans-serif UI chrome
+   used everywhere else, kept for readability.
    ========================================================================== */
 
-.date {
-  font-style: italic;
-  color: var(--gray);
+.posts,
+.post {
+  max-width: 720px;
+  margin: 0 auto;
+  width: 100%;
 }
 
+.date {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--ink-soft);
+  margin: 0.35rem 0 1rem;
+}
+
+/* -------------------------------------------------------------------- */
+/* Listing — each post as its own card                                  */
+/* -------------------------------------------------------------------- */
+
 .posts {
-  max-width: 60vw;
-  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 2rem 0 3rem;
 }
 
 .posts .post {
-  padding-bottom: 2em;
-  border-bottom: 1px solid var(--light-gray);
+  max-width: none;
+  margin: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: clamp(1.25rem, 3vw, 1.75rem);
+  box-shadow: var(--shadow-sm);
+}
+
+.posts .post > h2 {
+  font-size: clamp(1.25rem, 3vw, 1.6rem);
+  margin: 0 0 0.2rem;
 }
 
 .posts .post .entry {
-  margin-bottom: 0;
+  background: transparent;
   border: 0;
+  padding: 0;
+  box-shadow: none;
+  margin-bottom: 1rem;
 }
 
-.posts .post:last-child {
-  padding-bottom: 1em;
-  border-bottom: none;
+.posts .post .read-more {
+  color: var(--blue);
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: none;
+  letter-spacing: normal;
 }
 
-@media screen and (max-width: 640px) {
-  .posts {
-    max-width: 80vw;
-  }
+.posts .post .read-more:hover {
+  text-decoration: underline;
 }
 
-.post {
-  max-width: 60vw;
-  margin: auto;
+/* -------------------------------------------------------------------- */
+/* Single post                                                          */
+/* -------------------------------------------------------------------- */
+
+.post > h2 {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: var(--ink);
+  margin: 1.5rem 0 0.2rem;
+}
+
+.post .entry {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 4rem;
 }
 
 .post blockquote {
-  margin: 1.8em .8em;
-  border-left: 2px solid var(--gray);
+  margin: 1.8em 0.8em;
+  border-left: 2px solid color-mix(in srgb, var(--red) 30%, var(--border));
   padding: 0.1em 1em;
-  color: var(--gray);
+  color: var(--ink-soft);
   font-size: 22px;
   font-style: italic;
 }
@@ -53,26 +105,11 @@
   margin-top: 10px;
 }
 
-.post .read-more {
-  text-transform: uppercase;
-  font-size: 15px;
-}
-
-.post .entry {
-  margin-bottom: 4rem;
-  border-bottom: 2px solid var(--light-gray);
-}
-
-@media screen and (max-width: 640px) {
-  .post {
-    max-width: 80vw;
-  }
-}
-
 .entry > p {
   line-height: 32px;
   font-size: 21px;
   font-family: var(--font-serif);
+  text-align: left;
 }
 
 @media screen and (max-width: 640px) {
@@ -96,10 +133,27 @@
 
 .post-footer {
   margin-top: 3rem;
+  color: var(--ink-soft);
 }
 
 /* -------------------------------------------------------------------- */
-/* Syntax highlighting (Rouge / Gruvbox-dark)                           */
+/* Inline code                                                          */
+/* -------------------------------------------------------------------- */
+
+code {
+  font-family: "Bitstream Vera Sans Mono", "Courier", monospace;
+}
+
+code.language-plaintext {
+  background: var(--surface-alt);
+  color: var(--ink);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+}
+
+/* -------------------------------------------------------------------- */
+/* Syntax highlighting (Rouge / Gruvbox-dark) — a self-contained dark    */
+/* code theme, unrelated to the site's own light/dark mode.             */
 /* -------------------------------------------------------------------- */
 
 .highlight {
@@ -107,14 +161,6 @@
   padding: 7px 7px 7px 10px;
   margin: 20px 0 20px 0;
   overflow: auto;
-}
-
-code {
-  font-family: "Bitstream Vera Sans Mono", "Courier", monospace;
-}
-
-code.language-plaintext {
-  background: #f0f0f0;
 }
 
 .highlight table td { padding: 5px; }

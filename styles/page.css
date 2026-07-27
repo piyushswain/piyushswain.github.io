@@ -58,8 +58,11 @@
   color: var(--blue);
 }
 
-.page .entry ul,
-.page .entry ol {
+/* :not(.timeline) — the companies timeline below is also a <ol> inside
+   .entry, but it's a base.css component with its own rail/dot styling,
+   not a plain markdown bullet list. */
+.page .entry ul:not(.timeline),
+.page .entry ol:not(.timeline) {
   list-style: none;
   margin: 1.5rem 0;
   padding: 0;
@@ -68,14 +71,14 @@
   gap: 1rem;
 }
 
-.page .entry li {
+.page .entry li:not(.timeline-item) {
   position: relative;
   padding-left: 1.25rem;
   line-height: 1.6;
   color: var(--ink-soft);
 }
 
-.page .entry li::before {
+.page .entry li:not(.timeline-item)::before {
   content: "";
   position: absolute;
   left: 0;
@@ -90,4 +93,51 @@
   .page {
     margin: 1.5rem auto 3rem;
   }
+}
+
+/* -------------------------------------------------------------------- */
+/* About — portrait + intro, and a companies timeline reusing the same   */
+/* rail component the homepage's Career panel uses (base.css)            */
+/* -------------------------------------------------------------------- */
+
+.about-portrait {
+  float: left;
+  width: 120px;
+  height: 120px;
+  margin: 0 1.5rem 1rem 0;
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px var(--surface), 0 0 0 5px color-mix(in srgb, var(--red) 30%, transparent);
+}
+
+@media screen and (max-width: 640px) {
+  .about-portrait {
+    float: none;
+    display: block;
+    margin: 0 auto 1.25rem;
+  }
+}
+
+.about-section-title {
+  clear: both;
+  margin-top: 2rem;
+}
+
+.about-timeline {
+  margin-bottom: 1.5rem;
+}
+
+.about-timeline .item-title {
+  display: block;
+  margin-bottom: 0.2rem;
+}
+
+/* .page .entry p (above) would otherwise win on specificity and stretch
+   this back to full paragraph size/spacing */
+.about-timeline p.item-desc {
+  font-family: var(--font);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--ink-soft);
+  margin: 0.35rem 0 0;
+  text-align: left;
 }
