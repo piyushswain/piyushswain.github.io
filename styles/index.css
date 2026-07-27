@@ -1,9 +1,8 @@
 /* ==========================================================================
    index.css — homepage styling, scoped to .home
    Loaded after base.css so these rules win on shared class names without
-   touching other pages. Colors, radii, shadows, and fonts come from the
-   shared token set in base.css :root — this file only overrides them for
-   dark mode, scoped to .home so nothing else on the site is affected.
+   touching other pages. Colors, radii, shadows, and fonts (including the
+   light/dark flip) come from the shared token set in base.css :root.
    ========================================================================== */
 
 .home {
@@ -15,33 +14,53 @@ body:has(.home) {
   background: var(--surface);
 }
 
-@media (prefers-color-scheme: dark) {
-  body:has(.home) {
-    --ink: #f1f2f4;
-    --ink-soft: #b7bcc4;
-    --ink-faint: #7d838d;
-    --surface: #1b1c20;
-    --surface-alt: #202226;
-    --border: #303237;
-    --blue: #7fa8dd;
-    --green: #4fce9f;
-    --amber: #e0a15c;
-    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
-    --shadow-md: 0 12px 24px -12px rgba(0, 0, 0, 0.55), 0 4px 8px -4px rgba(0, 0, 0, 0.35);
-  }
-}
-
 /* -------------------------------------------------------------------- */
 /* Hero                                                                  */
 /* -------------------------------------------------------------------- */
 
 .hero {
+  position: relative;
+  isolation: isolate;
+  /* the glow below bleeds wider than the hero by design (soft edges need
+     room to fade out); clip it here — not on an ancestor of the sticky
+     career panel further down the page, which position:sticky needs to
+     stay visible (any ancestor with overflow other than visible disables
+     sticky for its descendants). */
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   padding: clamp(2.5rem, 6vw, 5rem) 1rem clamp(2rem, 5vw, 3.5rem);
   gap: 0.75rem;
+}
+
+/* a quiet red glow behind the title — the page's ambient accent, standing
+   in for the old red masthead block */
+.hero::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  left: 50%;
+  width: min(56rem, 140vw);
+  height: 26rem;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(closest-side, var(--red-glow), transparent 70%);
+  filter: blur(10px);
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero::before {
+    animation: home-glow-in 0.8s ease both;
+  }
+}
+
+@keyframes home-glow-in {
+  from { opacity: 0; }
+  to { opacity: 0.5; }
 }
 
 .eyebrow {
@@ -157,27 +176,6 @@ body:has(.home) {
   border-color: color-mix(in srgb, var(--red) 20%, var(--border));
 }
 
-.panel-title {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  margin: 0 0 1.1rem;
-  font-family: var(--font);
-  font-size: 1.05rem;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  color: var(--ink);
-}
-
-.panel-title::before {
-  content: "";
-  width: 0.5rem;
-  height: 0.5rem;
-  border-radius: 50%;
-  background: var(--red);
-  flex-shrink: 0;
-}
-
 .list {
   list-style: none;
   margin: 0;
@@ -209,12 +207,6 @@ body:has(.home) {
   margin-bottom: 0.15rem;
 }
 
-.item-title {
-  display: block;
-  font-weight: 600;
-  color: var(--ink);
-}
-
 .item-link {
   color: var(--blue);
   text-decoration: none;
@@ -223,13 +215,6 @@ body:has(.home) {
 
 .item-link:hover {
   text-decoration: underline;
-}
-
-.item-desc {
-  margin: 0.35rem 0 0;
-  color: var(--ink-soft);
-  font-size: 0.9rem;
-  line-height: 1.5;
 }
 
 .item-head {
@@ -268,6 +253,68 @@ body:has(.home) {
 }
 
 /* -------------------------------------------------------------------- */
+/* Work grid — three panels get distinct treatments instead of one       */
+/* repeated card, since the content types actually differ: career is a   */
+/* real sequence (timeline), open source is a scannable list (compact).  */
+/* -------------------------------------------------------------------- */
+
+.work-grid {
+  grid-template-columns: minmax(220px, 0.85fr) minmax(0, 1.65fr);
+  align-items: start;
+}
+
+.work-secondary {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* the career column is naturally shorter than the stacked Projects/Open
+   Source column; pinning it avoids a dead gap once the taller column
+   scrolls past it. Desktop only — stacked mobile layout doesn't need it. */
+@media screen and (min-width: 861px) {
+  .panel-timeline {
+    position: sticky;
+    top: 5.5rem;
+  }
+}
+
+/* Career — the timeline rail itself lives in base.css (shared with the
+   About page); this bit is specific to how Home combines a title with an
+   inline "current" tag. */
+
+.timeline-item .item-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tag-current {
+  color: var(--red);
+  background: var(--red-tint);
+}
+
+/* Open source — compact, described list instead of bare links */
+
+.list-compact {
+  gap: 0.75rem;
+}
+
+.list-compact .item {
+  padding-bottom: 0.75rem;
+}
+
+.list-compact .item-link {
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+.list-compact .item-desc {
+  margin: 0.25rem 0 0;
+  font-size: 0.85rem;
+}
+
+/* -------------------------------------------------------------------- */
 /* Motion (subtle entrance, respects reduced-motion)                    */
 /* -------------------------------------------------------------------- */
 
@@ -302,6 +349,12 @@ body:has(.home) {
 /* -------------------------------------------------------------------- */
 /* Mobile                                                                */
 /* -------------------------------------------------------------------- */
+
+@media screen and (max-width: 860px) {
+  .work-grid {
+    grid-template-columns: 1fr;
+  }
+}
 
 @media screen and (max-width: 640px) {
   .work {
