@@ -241,7 +241,6 @@ figure.image {
 
 .wrapper-masthead {
   background-color: var(--red);
-  box-shadow: 2px 2px 5px 5px var(--shadow-gray);
 }
 
 .masthead {
