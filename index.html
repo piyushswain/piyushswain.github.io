@@ -2,79 +2,97 @@
 layout: default
 ---
 
+<link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/styles/index.css" />
+
 <div class="home">
-  <div class="introduction">
+  <section class="hero">
+    <span class="eyebrow">Software Engineer · Ruby on Rails &amp; React</span>
     <h1 class="title">Hi there, I'm Piyush</h1>
-    <div class="short-info">
-      <span>I build awesome web applications using Ruby on Rails and React.<br />I try to share some of my work, learnings and thoughts here.</span>
+    <p class="subtitle">I build awesome web applications using Ruby on Rails and React.<br />I try to share some of my work, learnings and thoughts here.</p>
+    <div class="cta">
+      <a href="{{ site.baseurl }}/about" class="btn btn-primary">Learn More</a>
+      <a href="{{ site.baseurl }}/blog" class="btn btn-secondary">Checkout my Blog</a>
     </div>
-    <div class="quick-links">
-      <a href="{{ site.baseurl }}/about" class="btn animated-button gibson-one">Learn More</a>
-      <a href="{{ site.baseurl }}/blog" class="btn animated-button gibson-two">Checkout my Blog</a>
-    </div>
-  </div>
-  <div class="work">
-    <div class="professional-career">
-      <h3>Professional Career</h3>
-      <ul class="text-left">
-        <li>
-          Full Stack Developer | 2019 - 2021
-          <br />
-          <a href="https://www.elitmus.com/">eLitmus Evaluation Pvt. Ltd.</a>
+  </section>
+
+  <section class="work">
+    <div class="panel">
+      <h3 class="panel-title">Professional Career</h3>
+      <ul class="list">
+        <li class="item">
+          <span class="item-meta">2019 – 2021</span>
+          <span class="item-title">Full Stack Developer</span>
+          <a href="https://www.elitmus.com/" class="item-link">eLitmus Evaluation Pvt. Ltd.</a>
         </li>
-        <li>
-          Software Engineer | 2021 - present
-          <br />
-          <a href="https://nebulab.com/">Nebulab SRLS</a>
+        <li class="item">
+          <span class="item-meta">2021 – present</span>
+          <span class="item-title">Software Engineer</span>
+          <a href="https://nebulab.com/" class="item-link">Nebulab SRLS</a>
         </li>
       </ul>
     </div>
-    <div class="open-source">
-      <h3>Open Source Contributions</h3>
-      <ul class="text-left">
-        <li>
-          <a href="https://github.com/solidusio-contrib/solidus_razorpay" target="_blank">
+
+    <div class="panel">
+      <h3 class="panel-title">Open Source Contributions</h3>
+      <ul class="list">
+        <li class="item">
+          <a href="https://github.com/solidusio-contrib/solidus_razorpay" class="item-link">
             solidusio-contrib/solidus_razorpay
           </a>
         </li>
-        <li>
-          <a href="https://github.com/piyushswain/solidus_india" target="_blank">
+        <li class="item">
+          <a href="https://github.com/piyushswain/solidus_india" class="item-link">
             piyushswain/solidus_india
           </a>
-        <li>
-          <a href="https://github.com/rubyforgood/circulate/issues?q=author%3Apiyushswain+" target="_blank">
+        </li>
+        <li class="item">
+          <a href="https://github.com/rubyforgood/circulate/issues?q=author%3Apiyushswain+" class="item-link">
             rubyforgood / circulate
           </a>
         </li>
-        <li>
-          <a href="https://github.com/publiclab/plots2/commit/18a74578a4c949771a4fc5349c226af96d8375ff" target="_blank">
+        <li class="item">
+          <a href="https://github.com/publiclab/plots2/commit/18a74578a4c949771a4fc5349c226af96d8375ff" class="item-link">
             publiclab / plots2
           </a>
         </li>
-        <li>
-          <a href="https://github.com/piyushswain/LiveDisplayDetector" target="_blank">
+        <li class="item">
+          <a href="https://github.com/piyushswain/LiveDisplayDetector" class="item-link">
             LiveDisplayDetector
           </a>
         </li>
-        <li>
-          <a href="https://github.com/elitmus/knights-watch" target="_blank">
+        <li class="item">
+          <a href="https://github.com/elitmus/knights-watch" class="item-link">
             elitmus / knights-watch
           </a>
         </li>
       </ul>
     </div>
-    <div class="personal-projects">
-      <h3>Personal Projects</h3>
-      <ul class="text-left">
-        <li>
-          <a href="https://www.npmjs.com/package/react-rails-pagination">react-rails-pagination</a> - A npm package for a react component.
+
+    <div class="panel">
+      <h3 class="panel-title">Personal Projects</h3>
+      <ul class="list">
+        <li class="item">
+          <div class="item-head">
+            <a href="https://www.npmjs.com/package/react-rails-pagination" class="item-link">react-rails-pagination</a>
+            <span class="tag tag-frontend">frontend</span>
+          </div>
+          <p class="item-desc">A npm package for a react component.</p>
         </li>
-        <li>
-          <a href="https://github.com/piyushswain/Meeting-Scheduler">Meeting Scheduler</a> - A simple meeting and tasks scheduler application.
+        <li class="item">
+          <div class="item-head">
+            <a href="https://github.com/piyushswain/Meeting-Scheduler" class="item-link">Meeting Scheduler</a>
+            <span class="tag tag-fullstack">full stack</span>
+          </div>
+          <p class="item-desc">A simple meeting and tasks scheduler application.</p>
         </li>
-        <li>
-          <a href="https://github.com/piyushswain/Bidding-System">Ecommerce Bidding Website</a> - A front end implementation of an ecommerce website with a bidding system
+        <li class="item">
+          <div class="item-head">
+            <a href="https://github.com/piyushswain/Bidding-System" class="item-link">Ecommerce Bidding Website</a>
+            <span class="tag tag-frontend">frontend</span>
+          </div>
+          <p class="item-desc">A front end implementation of an ecommerce website with a bidding system.</p>
         </li>
+      </ul>
     </div>
-  </div>
+  </section>
 </div>

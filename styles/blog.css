@@ -1,0 +1,193 @@
+/* ==========================================================================
+   blog.css — blog listing (blog.html) and every individual post
+   (_layouts/post.html). One shared stylesheet so every post looks and
+   behaves the same, instead of styling being duplicated per post.
+   ========================================================================== */
+
+.date {
+  font-style: italic;
+  color: var(--gray);
+}
+
+.posts {
+  max-width: 60vw;
+  margin: auto;
+}
+
+.posts .post {
+  padding-bottom: 2em;
+  border-bottom: 1px solid var(--light-gray);
+}
+
+.posts .post .entry {
+  margin-bottom: 0;
+  border: 0;
+}
+
+.posts .post:last-child {
+  padding-bottom: 1em;
+  border-bottom: none;
+}
+
+@media screen and (max-width: 640px) {
+  .posts {
+    max-width: 80vw;
+  }
+}
+
+.post {
+  max-width: 60vw;
+  margin: auto;
+}
+
+.post blockquote {
+  margin: 1.8em .8em;
+  border-left: 2px solid var(--gray);
+  padding: 0.1em 1em;
+  color: var(--gray);
+  font-size: 22px;
+  font-style: italic;
+}
+
+.post .comments {
+  margin-top: 10px;
+}
+
+.post .read-more {
+  text-transform: uppercase;
+  font-size: 15px;
+}
+
+.post .entry {
+  margin-bottom: 4rem;
+  border-bottom: 2px solid var(--light-gray);
+}
+
+@media screen and (max-width: 640px) {
+  .post {
+    max-width: 80vw;
+  }
+}
+
+.entry > p {
+  line-height: 32px;
+  font-size: 21px;
+  font-family: var(--font-serif);
+}
+
+@media screen and (max-width: 640px) {
+  .entry > p {
+    line-height: 28px;
+    font-size: 18px;
+  }
+}
+
+.entry > ol,
+.entry > ul {
+  font-size: 21px;
+}
+
+@media screen and (max-width: 640px) {
+  .entry > ol,
+  .entry > ul {
+    font-size: 18px;
+  }
+}
+
+.post-footer {
+  margin-top: 3rem;
+}
+
+/* -------------------------------------------------------------------- */
+/* Syntax highlighting (Rouge / Gruvbox-dark)                           */
+/* -------------------------------------------------------------------- */
+
+.highlight {
+  background-color: #282828;
+  padding: 7px 7px 7px 10px;
+  margin: 20px 0 20px 0;
+  overflow: auto;
+}
+
+code {
+  font-family: "Bitstream Vera Sans Mono", "Courier", monospace;
+}
+
+code.language-plaintext {
+  background: #f0f0f0;
+}
+
+.highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+
+.highlight, .highlight .w {
+  color: #fbf1c7;
+  background-color: #282828;
+}
+
+.highlight .err {
+  color: #fb4934;
+  background-color: #282828;
+  font-weight: bold;
+}
+
+.highlight .c, .highlight .ch, .highlight .cd, .highlight .cm, .highlight .cpf, .highlight .c1, .highlight .cs {
+  color: #928374;
+  font-style: italic;
+}
+
+.highlight .cp { color: #8ec07c; }
+.highlight .nt { color: #fb4934; }
+.highlight .o, .highlight .ow { color: #fbf1c7; }
+.highlight .p, .highlight .pi { color: #fbf1c7; }
+
+.highlight .gi {
+  color: #b8bb26;
+  background-color: #282828;
+}
+
+.highlight .gd {
+  color: #fb4934;
+  background-color: #282828;
+}
+
+.highlight .gh {
+  color: #b8bb26;
+  font-weight: bold;
+}
+
+.highlight .k, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kv {
+  color: #fb4934;
+}
+
+.highlight .kc { color: #d3869b; }
+.highlight .kt { color: #fabd2f; }
+.highlight .kd { color: #fe8019; }
+
+.highlight .s, .highlight .sb, .highlight .sc, .highlight .dl, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .s1 {
+  color: #b8bb26;
+  font-style: italic;
+}
+
+.highlight .si {
+  color: #b8bb26;
+  font-style: italic;
+}
+
+.highlight .sr {
+  color: #b8bb26;
+  font-style: italic;
+}
+
+.highlight .sa { color: #fb4934; }
+.highlight .se { color: #fe8019; }
+.highlight .nn { color: #8ec07c; }
+.highlight .nc { color: #8ec07c; }
+.highlight .no { color: #d3869b; }
+.highlight .na { color: #b8bb26; }
+
+.highlight .m, .highlight .mb, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mx {
+  color: #d3869b;
+}
+
+.highlight .ss { color: #83a598; }
