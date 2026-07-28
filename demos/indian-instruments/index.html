@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Swara — four Indian instruments, played by hand</title>
+<meta name="description" content="Sitar, bansuri, sarangi and shehnai, drawn in SVG and voiced by the Web Audio API. Press and drag to play; each one has a thirty-second piece in its own raag.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Devanagari:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ── Gate: audio needs a gesture, so make the gesture part of the piece ── -->
+<div class="gate" id="gate">
+  <div class="gate-inner">
+    <p class="gate-eyebrow">Four instruments · Web Audio · no samples</p>
+    <h1 class="gate-title">स्वर<span class="gate-title-rom">Swara</span></h1>
+    <p class="gate-note">Every sound here is synthesised in the browser — the strings, the reed, the breath, the drums. Move across an instrument to sound it, hold on to keep a swara under your hand, or let each one play its own thirty seconds.</p>
+    <button class="gate-button" id="gateButton" type="button">Begin<span class="gate-button-arrow" aria-hidden="true">↓</span></button>
+    <p class="gate-fine">Sound on. Headphones recommended.</p>
+  </div>
+</div>
+
+<!-- ── Instrument index ── -->
+<nav class="index" aria-label="Instruments">
+  <ol>
+    <li><a href="#sitar" data-jump="0"><span class="index-dev">सितार</span><span class="index-rom">Sitar</span></a></li>
+    <li><a href="#bansuri" data-jump="1"><span class="index-dev">बाँसुरी</span><span class="index-rom">Bansuri</span></a></li>
+    <li><a href="#sarangi" data-jump="2"><span class="index-dev">सारंगी</span><span class="index-rom">Sarangi</span></a></li>
+    <li><a href="#shehnai" data-jump="3"><span class="index-dev">शहनाई</span><span class="index-rom">Shehnai</span></a></li>
+  </ol>
+</nav>
+
+<main class="reel" id="reel">
+
+  <!-- ═══════════ SITAR ═══════════ -->
+  <section class="stage" id="sitar" data-instrument="sitar" tabindex="-1">
+    <header class="meta meta-top">
+      <p class="meta-name"><span class="meta-dev">सितार</span><span class="meta-rom">Sitar</span></p>
+      <div class="meta-right">
+        <p class="meta-line"><span class="meta-key">Raag</span> Bhairavi<span class="meta-sep">/</span><span class="meta-key">Rasa</span> karuna — melancholy</p>
+        <div class="player">
+          <button class="play" data-play type="button">
+            <span class="play-icon" aria-hidden="true"></span>
+            <span class="play-label">Play the piece</span>
+            <span class="play-time" data-time>0:30</span>
+          </button>
+        </div>
+      </div>
+      <span class="progress" data-progress aria-hidden="true"></span>
+    </header>
+
+    <div class="figure" data-figure>
+      <svg class="instrument" viewBox="0 0 1200 340" preserveAspectRatio="xMidYMid meet" role="img" aria-label="A sitar drawn in line art, with eight playing strings across the neck">
+        <defs>
+          <radialGradient id="sitarGourd" cx="38%" cy="34%" r="76%">
+            <stop offset="0%" stop-color="#3a2a17"/><stop offset="100%" stop-color="#100c09"/>
+          </radialGradient>
+          <linearGradient id="sitarNeck" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#241a10"/><stop offset="100%" stop-color="#0d0a07"/>
+          </linearGradient>
+        </defs>
+
+        <!-- gourd -->
+        <circle class="body" data-body cx="1000" cy="170" r="156" fill="url(#sitarGourd)" stroke="currentColor" stroke-opacity=".55"/>
+        <circle cx="1000" cy="170" r="126" fill="none" stroke="currentColor" stroke-opacity=".18"/>
+        <ellipse cx="1000" cy="170" rx="58" ry="46" fill="none" stroke="currentColor" stroke-opacity=".22"/>
+        <path d="M942 112 L978 112 L972 228 L936 228 Z" fill="none" stroke="currentColor" stroke-opacity=".65"/>
+
+        <!-- neck -->
+        <rect x="140" y="104" width="790" height="132" rx="18" fill="url(#sitarNeck)" stroke="currentColor" stroke-opacity=".45"/>
+        <g stroke="currentColor" stroke-opacity=".3" fill="none" class="frets">
+          <path d="M232 106 Q248 170 232 234"/><path d="M300 106 Q316 170 300 234"/>
+          <path d="M364 106 Q380 170 364 234"/><path d="M424 106 Q440 170 424 234"/>
+          <path d="M482 106 Q498 170 482 234"/><path d="M536 106 Q552 170 536 234"/>
+          <path d="M588 106 Q604 170 588 234"/><path d="M636 106 Q652 170 636 234"/>
+          <path d="M682 106 Q698 170 682 234"/><path d="M726 106 Q742 170 726 234"/>
+          <path d="M768 106 Q784 170 768 234"/><path d="M808 106 Q824 170 808 234"/>
+          <path d="M846 106 Q862 170 846 234"/><path d="M882 106 Q898 170 882 234"/>
+        </g>
+
+        <!-- pegbox + pegs -->
+        <path d="M46 112 Q30 170 46 228 L152 236 L152 104 Z" fill="#120d08" stroke="currentColor" stroke-opacity=".5"/>
+        <g fill="none" stroke="currentColor" stroke-opacity=".55">
+          <circle cx="96" cy="132" r="9"/><circle cx="96" cy="170" r="9"/><circle cx="96" cy="208" r="9"/>
+        </g>
+        <!-- sympathetic (tarab) pegs down the side -->
+        <g fill="none" stroke="currentColor" stroke-opacity=".22">
+          <circle cx="300" cy="256" r="6"/><circle cx="360" cy="256" r="6"/><circle cx="420" cy="256" r="6"/>
+          <circle cx="480" cy="256" r="6"/><circle cx="540" cy="256" r="6"/><circle cx="600" cy="256" r="6"/>
+          <circle cx="660" cy="256" r="6"/><circle cx="720" cy="256" r="6"/><circle cx="780" cy="256" r="6"/>
+        </g>
+
+        <!-- eight playing strings: Sa at the bottom, Sa' at the top -->
+        <g class="strings" stroke="currentColor" stroke-linecap="round" fill="none">
+          <path class="string" data-string="0" d="M86 118 L1060 118"/>
+          <path class="string" data-string="1" d="M86 134 L1060 134"/>
+          <path class="string" data-string="2" d="M86 150 L1060 150"/>
+          <path class="string" data-string="3" d="M86 166 L1060 166"/>
+          <path class="string" data-string="4" d="M86 182 L1060 182"/>
+          <path class="string" data-string="5" d="M86 198 L1060 198"/>
+          <path class="string" data-string="6" d="M86 214 L1060 214"/>
+          <path class="string" data-string="7" d="M86 230 L1060 230"/>
+        </g>
+      </svg>
+      <div class="halo" data-halo aria-hidden="true"></div>
+    </div>
+
+    <footer class="meta meta-bottom">
+      <p class="meta-play">
+        <span><b>Move</b> across the strings to strum</span>
+        <span><b>Hold</b> a string to keep it</span>
+        <span><b>Pull</b> along the neck to bend it</span>
+        <span><b>Click away</b> to let go</span>
+      </p>
+      <p class="meta-desc">Plucked. Struck once, the tarab strings behind the frets answer on their own.</p>
+    </footer>
+
+    <div class="rail" data-rail aria-hidden="true"></div>
+  </section>
+
+  <!-- ═══════════ BANSURI ═══════════ -->
+  <section class="stage" id="bansuri" data-instrument="bansuri" tabindex="-1">
+    <header class="meta meta-top">
+      <p class="meta-name"><span class="meta-dev">बाँसुरी</span><span class="meta-rom">Bansuri</span></p>
+      <div class="meta-right">
+        <p class="meta-line"><span class="meta-key">Raag</span> Yaman<span class="meta-sep">/</span><span class="meta-key">Rasa</span> shanta — stillness</p>
+        <div class="player">
+          <button class="play" data-play type="button">
+            <span class="play-icon" aria-hidden="true"></span>
+            <span class="play-label">Play the piece</span>
+            <span class="play-time" data-time>0:30</span>
+          </button>
+        </div>
+      </div>
+      <span class="progress" data-progress aria-hidden="true"></span>
+    </header>
+
+    <div class="figure" data-figure>
+      <svg class="instrument" viewBox="0 0 1200 340" preserveAspectRatio="xMidYMid meet" role="img" aria-label="A bansuri bamboo flute drawn in line art, foot end at the left, blowing hole at the right">
+        <defs>
+          <linearGradient id="bamboo" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#16352d"/><stop offset="52%" stop-color="#0c1f1a"/><stop offset="100%" stop-color="#07120f"/>
+          </linearGradient>
+        </defs>
+
+        <rect class="body" data-body x="40" y="136" width="1122" height="68" rx="34" fill="url(#bamboo)" stroke="currentColor" stroke-opacity=".5"/>
+        <line x1="40" y1="158" x2="1162" y2="158" stroke="currentColor" stroke-opacity=".14"/>
+
+        <!-- bamboo nodes -->
+        <g stroke="currentColor" stroke-opacity=".3" fill="none">
+          <path d="M896 136 Q902 170 896 204"/><path d="M908 136 Q914 170 908 204"/>
+          <path d="M120 136 Q126 170 120 204"/>
+        </g>
+
+        <!-- the closed foot end sounds Sa -->
+        <circle class="hole ghost" data-hole="0" cx="76" cy="170" r="14"/>
+
+        <!-- six finger holes: Re to Ni, rising towards the lip -->
+        <g class="holes">
+          <circle class="hole" data-hole="1" cx="200" cy="170" r="16"/>
+          <circle class="hole" data-hole="2" cx="320" cy="170" r="16"/>
+          <circle class="hole" data-hole="3" cx="440" cy="170" r="16"/>
+          <circle class="hole" data-hole="4" cx="560" cy="170" r="16"/>
+          <circle class="hole" data-hole="5" cx="680" cy="170" r="16"/>
+          <circle class="hole" data-hole="6" cx="800" cy="170" r="16"/>
+        </g>
+
+        <!-- overblow to the upper Sa -->
+        <circle class="hole ghost" data-hole="7" cx="960" cy="170" r="14"/>
+
+        <!-- blowing hole -->
+        <ellipse cx="1064" cy="170" rx="21" ry="17" fill="#040807" stroke="currentColor" stroke-opacity=".7"/>
+        <ellipse class="breath" cx="1064" cy="170" rx="21" ry="17" fill="none" stroke="currentColor" data-breath/>
+      </svg>
+      <div class="halo" data-halo aria-hidden="true"></div>
+    </div>
+
+    <footer class="meta meta-bottom">
+      <p class="meta-play">
+        <span><b>Move</b> along the bamboo to sound it</span>
+        <span><b>Hold</b> to keep the swara</span>
+        <span><b>Pull</b> across it for fuller breath</span>
+        <span><b>Click away</b> to let go</span>
+      </p>
+      <p class="meta-desc">One length of bamboo, six holes, no keys. Closed at the foot it sounds Sa; the last stop before the lip is overblown to the octave.</p>
+    </footer>
+
+    <div class="rail" data-rail aria-hidden="true"></div>
+  </section>
+
+  <!-- ═══════════ SARANGI ═══════════ -->
+  <section class="stage" id="sarangi" data-instrument="sarangi" tabindex="-1">
+    <header class="meta meta-top">
+      <p class="meta-name"><span class="meta-dev">सारंगी</span><span class="meta-rom">Sarangi</span></p>
+      <div class="meta-right">
+        <p class="meta-line"><span class="meta-key">Raag</span> Bhairav<span class="meta-sep">/</span><span class="meta-key">Rasa</span> bhakti — devotion</p>
+        <div class="player">
+          <button class="play" data-play type="button">
+            <span class="play-icon" aria-hidden="true"></span>
+            <span class="play-label">Play the piece</span>
+            <span class="play-time" data-time>0:30</span>
+          </button>
+        </div>
+      </div>
+      <span class="progress" data-progress aria-hidden="true"></span>
+    </header>
+
+    <div class="figure" data-figure>
+      <svg class="instrument" viewBox="0 0 1200 340" preserveAspectRatio="xMidYMid meet" role="img" aria-label="A sarangi drawn in line art, with three gut strings over a parchment belly">
+        <defs>
+          <linearGradient id="sarangiBody" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#2b1512"/><stop offset="100%" stop-color="#0f0807"/>
+          </linearGradient>
+          <radialGradient id="parchment" cx="42%" cy="34%" r="72%">
+            <stop offset="0%" stop-color="#6b4038"/><stop offset="100%" stop-color="#26130f"/>
+          </radialGradient>
+        </defs>
+
+        <!-- one block of tun wood: pegbox, neck and body -->
+        <path d="M44 104 L186 96 L186 244 L44 236 Z" fill="#170b09" stroke="currentColor" stroke-opacity=".5"/>
+        <g fill="none" stroke="currentColor" stroke-opacity=".6">
+          <circle cx="98" cy="134" r="10"/><circle cx="98" cy="170" r="10"/><circle cx="98" cy="206" r="10"/>
+        </g>
+
+        <path d="M186 100 L566 104 L566 236 L186 240 Z" fill="url(#sarangiBody)" stroke="currentColor" stroke-opacity=".4"/>
+
+        <path d="M560 104
+                 C 660 76 706 104 724 136
+                 C 752 90 866 52 980 56
+                 C 1090 60 1156 104 1156 172
+                 C 1156 240 1090 284 980 288
+                 C 866 292 752 254 724 208
+                 C 706 240 660 268 560 240 Z"
+              fill="url(#sarangiBody)" stroke="currentColor" stroke-opacity=".5"/>
+
+        <!-- goatskin belly, stretched over the lower bout -->
+        <ellipse class="body" data-body cx="962" cy="172" rx="152" ry="94" fill="url(#parchment)" fill-opacity=".7" stroke="currentColor" stroke-opacity=".3"/>
+        <ellipse cx="962" cy="172" rx="152" ry="94" fill="none" stroke="currentColor" stroke-opacity=".1" stroke-dasharray="3 8"/>
+        <path d="M918 142 L974 142 L968 208 L912 208 Z" fill="none" stroke="currentColor" stroke-opacity=".6"/>
+
+        <!-- sympathetic pegs, two rows down the side of the neck -->
+        <g fill="none" stroke="currentColor" stroke-opacity=".28">
+          <circle cx="236" cy="120" r="5"/><circle cx="272" cy="120" r="5"/><circle cx="308" cy="120" r="5"/>
+          <circle cx="344" cy="120" r="5"/><circle cx="380" cy="120" r="5"/><circle cx="416" cy="120" r="5"/>
+          <circle cx="452" cy="120" r="5"/><circle cx="488" cy="120" r="5"/>
+          <circle cx="236" cy="220" r="5"/><circle cx="272" cy="220" r="5"/><circle cx="308" cy="220" r="5"/>
+          <circle cx="344" cy="220" r="5"/><circle cx="380" cy="220" r="5"/><circle cx="416" cy="220" r="5"/>
+          <circle cx="452" cy="220" r="5"/><circle cx="488" cy="220" r="5"/>
+        </g>
+
+        <!-- thirty-odd sympathetic strings, running under the melody strings -->
+        <g stroke="currentColor" stroke-opacity=".13">
+          <line x1="150" y1="140" x2="940" y2="146"/><line x1="150" y1="145" x2="940" y2="150"/>
+          <line x1="150" y1="150" x2="940" y2="154"/>
+          <line x1="150" y1="190" x2="940" y2="190"/><line x1="150" y1="195" x2="940" y2="194"/>
+          <line x1="150" y1="200" x2="940" y2="198"/>
+        </g>
+
+        <!-- three gut melody strings -->
+        <g class="strings" stroke="currentColor" stroke-linecap="round" fill="none">
+          <path class="string" data-string="0" d="M98 158 L944 162"/>
+          <path class="string" data-string="1" d="M98 170 L944 172"/>
+          <path class="string" data-string="2" d="M98 182 L944 182"/>
+        </g>
+
+        <!-- the bow follows the hand -->
+        <g class="bow" data-bow transform="translate(600,170)">
+          <line x1="0" y1="-96" x2="0" y2="96" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
+          <line x1="0" y1="-96" x2="0" y2="96" stroke="currentColor" stroke-width="14" stroke-opacity=".18" stroke-linecap="round"/>
+        </g>
+      </svg>
+      <div class="halo" data-halo aria-hidden="true"></div>
+    </div>
+
+    <footer class="meta meta-bottom">
+      <p class="meta-play">
+        <span><b>Move</b> along the strings to bow</span>
+        <span><b>Hold</b> to keep the swara</span>
+        <span><b>Pull</b> across for a heavier bow</span>
+        <span><b>Click away</b> to let go</span>
+      </p>
+      <p class="meta-desc">Bowed, fretless, stopped with the fingernails. Of all these, the one said to come closest to the human voice.</p>
+    </footer>
+
+    <div class="rail" data-rail aria-hidden="true"></div>
+  </section>
+
+  <!-- ═══════════ SHEHNAI ═══════════ -->
+  <section class="stage" id="shehnai" data-instrument="shehnai" tabindex="-1">
+    <header class="meta meta-top">
+      <p class="meta-name"><span class="meta-dev">शहनाई</span><span class="meta-rom">Shehnai</span></p>
+      <div class="meta-right">
+        <p class="meta-line"><span class="meta-key">Raag</span> Bilawal<span class="meta-sep">/</span><span class="meta-key">Rasa</span> mangal — rejoicing</p>
+        <div class="player">
+          <button class="play" data-play type="button">
+            <span class="play-icon" aria-hidden="true"></span>
+            <span class="play-label">Play the piece</span>
+            <span class="play-time" data-time>0:30</span>
+          </button>
+        </div>
+      </div>
+      <span class="progress" data-progress aria-hidden="true"></span>
+    </header>
+
+    <div class="figure" data-figure>
+      <svg class="instrument" viewBox="0 0 1200 340" preserveAspectRatio="xMidYMid meet" role="img" aria-label="A shehnai drawn in line art, flared metal bell at the left, reed at the right">
+        <defs>
+          <linearGradient id="shehnaiWood" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#3a2a0c"/><stop offset="55%" stop-color="#1a1306"/><stop offset="100%" stop-color="#0b0803"/>
+          </linearGradient>
+          <linearGradient id="shehnaiBell" x1="1" y1="0" x2="0" y2="0">
+            <stop offset="0%" stop-color="#2a2008"/><stop offset="100%" stop-color="#584009"/>
+          </linearGradient>
+        </defs>
+
+        <!-- flared bell -->
+        <path class="body" data-body d="M300 118 C 220 112 180 74 138 42 C 90 8 12 58 12 170 C 12 282 90 332 138 298 C 180 266 220 228 300 222 Z"
+              fill="url(#shehnaiBell)" fill-opacity=".55" stroke="currentColor" stroke-opacity=".55"/>
+        <path d="M300 140 C 214 136 174 104 132 74" fill="none" stroke="currentColor" stroke-opacity=".2"/>
+        <path d="M300 200 C 214 204 174 236 132 266" fill="none" stroke="currentColor" stroke-opacity=".2"/>
+
+        <!-- conical body, narrowing towards the reed -->
+        <path d="M1064 152 L300 112 L300 228 L1064 188 Z" fill="url(#shehnaiWood)" stroke="currentColor" stroke-opacity=".5"/>
+
+        <!-- reed and staple -->
+        <rect x="1064" y="148" width="26" height="44" rx="6" fill="#171004" stroke="currentColor" stroke-opacity=".5"/>
+        <rect x="1090" y="156" width="46" height="28" rx="6" fill="#171004" stroke="currentColor" stroke-opacity=".5"/>
+        <path d="M1168 164 L1136 158 L1136 182 L1168 176 Z" fill="none" stroke="currentColor" stroke-opacity=".7"/>
+
+        <!-- every hole closed sounds Sa -->
+        <circle class="hole ghost" data-hole="0" cx="350" cy="170" r="13"/>
+
+        <!-- seven holes, rising towards the reed -->
+        <g class="holes">
+          <circle class="hole" data-hole="1" cx="428" cy="170" r="14"/>
+          <circle class="hole" data-hole="2" cx="520" cy="170" r="13.5"/>
+          <circle class="hole" data-hole="3" cx="612" cy="170" r="13"/>
+          <circle class="hole" data-hole="4" cx="704" cy="170" r="12.5"/>
+          <circle class="hole" data-hole="5" cx="796" cy="170" r="12"/>
+          <circle class="hole" data-hole="6" cx="888" cy="170" r="11.5"/>
+          <circle class="hole" data-hole="7" cx="980" cy="170" r="11"/>
+        </g>
+      </svg>
+      <div class="halo" data-halo aria-hidden="true"></div>
+    </div>
+
+    <footer class="meta meta-bottom">
+      <p class="meta-play">
+        <span><b>Move</b> along the pipe to sound it</span>
+        <span><b>Hold</b> to keep the swara</span>
+        <span><b>Pull</b> across to lean on the reed</span>
+        <span><b>Click away</b> to let go</span>
+      </p>
+      <p class="meta-desc">Double reed, played at weddings and at dawn. A mangal vadya: an instrument of good omen.</p>
+    </footer>
+
+    <div class="rail" data-rail aria-hidden="true"></div>
+  </section>
+
+</main>
+
+<p class="hint" id="hint" aria-live="polite">Move across the instrument</p>
+
+<script src="main.js"></script>
+</body>
+</html>
