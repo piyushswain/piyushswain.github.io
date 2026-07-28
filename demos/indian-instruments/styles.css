@@ -1,0 +1,640 @@
+/* ─────────────────────────────────────────────────────────────
+   Swara — four Indian instruments
+   Tokens: ink ground, one accent per instrument (its hour of day)
+   ───────────────────────────────────────────────────────────── */
+
+:root {
+  --ink:        #07070b;
+  --ink-lift:   #0d0d13;
+  --bright:     #f4f1f6;
+  --muted:      #8a8694;
+  --hair:       rgba(244, 241, 246, 0.12);
+
+  --accent:     #e8a33d;              /* overridden per stage */
+  --accent-dim: rgba(232, 163, 61, 0.4);
+
+  --display: "Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --dev:     "IBM Plex Sans Devanagari", "Noto Sans Devanagari", system-ui, sans-serif;
+  --mono:    "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --gutter: clamp(1.25rem, 3.4vw, 3.5rem);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  background: var(--ink);
+  color: var(--bright);
+  font-family: var(--mono);
+  -webkit-font-smoothing: antialiased;
+}
+
+body { overflow: hidden; }
+
+/* ── The reel ───────────────────────────────────────────────── */
+
+.reel {
+  height: 100dvh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scrollbar-width: none;
+}
+.reel::-webkit-scrollbar { display: none; }
+
+.stage {
+  position: relative;
+  height: 100dvh;
+  scroll-snap-align: start;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  padding: clamp(1.5rem, 3.5vh, 3rem) var(--gutter);
+  padding-left: clamp(5.5rem, 11vw, 12rem);
+  color: var(--accent);
+  isolation: isolate;
+  outline: none;
+}
+
+/* Each stage is lit by its own hour. */
+#sitar   { --accent: #e8a33d; --accent-dim: rgba(232, 163, 61, .38); --wash: #140f22; }
+#bansuri { --accent: #6fe0b8; --accent-dim: rgba(111, 224, 184, .34); --wash: #08201c; }
+#sarangi { --accent: #e8756a; --accent-dim: rgba(232, 117, 106, .34); --wash: #1e0f12; }
+#shehnai { --accent: #f2c230; --accent-dim: rgba(242, 194, 48, .34); --wash: #201704; }
+
+.stage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(120% 82% at 50% 52%, var(--wash) 0%, transparent 72%),
+    var(--ink);
+}
+
+/* the room brightens while an instrument is sounding */
+.stage::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(75% 60% at 50% 50%, var(--accent) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity .5s ease;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+.stage.sounding::after { opacity: .085; }
+
+/* ── Meta rows ──────────────────────────────────────────────── */
+
+.meta {
+  position: relative;
+  /* The instruments are tilted, which swings the corners of their box up over
+     the header — transforms move the hit area, not the layout. The rows have
+     to sit above them or the play button never receives the click. */
+  z-index: 3;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin: 0;
+  padding-bottom: .85rem;
+  border-bottom: 1px solid var(--hair);
+}
+.stage.held .figure { cursor: grabbing; }
+
+.meta-bottom {
+  border-bottom: 0;
+  border-top: 1px solid var(--hair);
+  padding-bottom: 0;
+  padding-top: .85rem;
+  align-items: flex-end;
+}
+.meta p { margin: 0; }
+
+.meta-name { display: flex; align-items: baseline; gap: .85rem; }
+.meta-dev {
+  font-family: var(--dev);
+  font-weight: 300;
+  font-size: clamp(1.6rem, 3.4vw, 2.9rem);
+  line-height: 1;
+  color: var(--bright);
+}
+.meta-rom {
+  font-family: var(--display);
+  font-size: clamp(1.5rem, 3.1vw, 2.7rem);
+  font-style: italic;
+  line-height: 1;
+  color: var(--accent);
+}
+
+.meta-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: clamp(.9rem, 2.2vw, 2rem);
+  flex-wrap: wrap;
+}
+
+.meta-line, .meta-play, .meta-desc {
+  font-size: clamp(.62rem, .78vw, .74rem);
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* the four verbs of the instrument */
+.meta-play {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: .5rem 0;
+  letter-spacing: .1em;
+}
+.meta-play span:not(:last-child)::after {
+  content: "·";
+  margin: 0 .85em;
+  color: var(--hair);
+}
+.meta-play b {
+  color: var(--accent);
+  font-weight: 500;
+  margin-right: .35em;
+}
+
+/* ── Player ─────────────────────────────────────────────────── */
+
+.play {
+  display: inline-flex;
+  align-items: center;
+  gap: .65rem;
+  padding: .5rem 1.05rem .5rem .9rem;
+  border: 1px solid var(--accent-dim);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: .6rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background .25s ease, color .25s ease, border-color .25s ease;
+}
+.play:hover, .play:focus-visible {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--ink);
+}
+.play-icon {
+  width: 0; height: 0;
+  border-left: 7px solid currentColor;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+}
+.play.is-playing .play-icon {
+  width: 8px; height: 8px;
+  border: 0;
+  background: currentColor;
+}
+.play-time {
+  opacity: .55;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: .1em;
+}
+
+/* the section's own rule fills as the piece plays */
+.progress {
+  position: absolute;
+  left: 0; right: 0; bottom: -1px;
+  height: 1px;
+  background: var(--accent);
+  box-shadow: 0 0 10px var(--accent);
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+.meta-key {
+  color: var(--accent);
+  opacity: .75;
+  margin-right: .5em;
+}
+.meta-sep { margin: 0 .9em; opacity: .35; }
+.meta-bottom .meta-desc {
+  margin-left: auto;            /* stays on the right edge even when it wraps */
+}
+.meta-desc {
+  text-transform: none;
+  letter-spacing: .02em;
+  font-size: clamp(.68rem, .82vw, .8rem);
+  max-width: 44ch;
+  text-align: right;
+  color: rgba(244, 241, 246, .42);
+}
+.meta-play { color: var(--bright); }
+.axis {
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 1.5em;
+  letter-spacing: 0;
+  color: var(--accent);
+  margin-right: .35em;
+  text-transform: none;
+}
+
+/* ── Figure: the instrument owns the middle of the screen ───── */
+
+.figure {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 0;
+  padding-right: clamp(1.5rem, 4vw, 4rem);
+  cursor: crosshair;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: pan-y;
+}
+
+.instrument {
+  width: 100%;
+  height: 100%;
+  max-height: 74vh;
+  color: var(--accent);
+  overflow: visible;
+  filter: drop-shadow(0 24px 70px rgba(0, 0, 0, .8));
+  /* each instrument lies at its own angle, the way one is set down after playing */
+  transform: rotate(var(--tilt, 0deg)) scale(var(--zoom, 1.06));
+}
+
+#sitar   .instrument { --tilt: -6.5deg; }
+#bansuri .instrument { --tilt:  4.5deg; --zoom: 1; }
+#sarangi .instrument { --tilt: -5deg; }
+#shehnai .instrument { --tilt:  6.5deg; }
+
+.string {
+  fill: none;
+  stroke-width: 1.4;
+  stroke-opacity: .5;
+  transition: stroke-opacity .25s ease, stroke-width .25s ease;
+}
+.string.ready { stroke-opacity: .78; }
+.string.lit {
+  stroke-opacity: 1;
+  stroke-width: 2.2;
+  filter: drop-shadow(0 0 10px var(--accent));
+}
+.string.ringing { animation: ring .55s cubic-bezier(.2, .8, .3, 1); }
+
+@keyframes ring {
+  0%   { transform: translateY(0)    scaleY(1); }
+  18%  { transform: translateY(-3px) scaleY(1); }
+  42%  { transform: translateY(2px)  scaleY(1); }
+  68%  { transform: translateY(-1px) scaleY(1); }
+  100% { transform: translateY(0)    scaleY(1); }
+}
+
+.hole {
+  fill: #04060a;
+  stroke: currentColor;
+  stroke-opacity: .55;
+  stroke-width: 1.4;
+  transition: fill .25s ease, stroke-opacity .25s ease;
+}
+.hole.ready { stroke-opacity: .9; fill: #0a1018; }
+.hole.lit {
+  fill: var(--accent);
+  stroke-opacity: 1;
+  filter: drop-shadow(0 0 16px var(--accent));
+}
+
+/* the two stops that are positions rather than holes: closed, and overblown */
+.hole.ghost {
+  fill: none;
+  stroke-dasharray: 3 5;
+  stroke-opacity: .35;
+}
+.hole.ghost.lit {
+  fill: var(--accent);
+  stroke-dasharray: none;
+}
+
+/* the gourd, the belly, the bell: struck by the drums in the piece */
+.body { transition: stroke-opacity .45s ease; }
+.body.hit { animation: bodyHit .5s ease-out; }
+@keyframes bodyHit {
+  0%   { stroke-opacity: 1; filter: drop-shadow(0 0 26px var(--accent)); }
+  100% { stroke-opacity: .55; filter: none; }
+}
+
+.breath {
+  stroke-opacity: 0;
+  stroke-width: 2;
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: stroke-opacity .3s ease;
+}
+.stage.sounding .breath {
+  stroke-opacity: .8;
+  animation: breathe 1.9s ease-in-out infinite;
+}
+@keyframes breathe {
+  0%, 100% { transform: scale(1);   stroke-opacity: .7; }
+  50%      { transform: scale(1.8); stroke-opacity: 0; }
+}
+
+/* the bow's position is an SVG attribute, set from the pointer — no CSS transform
+   here, which would override it */
+.bow {
+  opacity: 0;
+  transition: opacity .3s ease;
+}
+.stage.sounding .bow { opacity: .75; }
+
+/* the cursor's own light, sitting under the line art */
+.halo {
+  position: absolute;
+  width: 30vmin;
+  height: 30vmin;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle, var(--accent) 0%, transparent 66%);
+  opacity: 0;
+  filter: blur(24px);
+  transform: translate(-50%, -50%);
+  transition: opacity .35s ease;
+  z-index: -1;
+  left: 0; top: 0;
+}
+.stage.sounding .halo { opacity: .34; }
+
+/* ── Swara rail: the signature ──────────────────────────────── */
+
+.rail {
+  position: absolute;
+  right: calc(var(--gutter) * .5);
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column-reverse;   /* Sa at the bottom, as a scale climbs */
+  align-items: flex-end;
+  gap: clamp(.5rem, 1.5vh, 1.1rem);
+  pointer-events: none;
+}
+.swara {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  font-family: var(--dev);
+  font-size: clamp(.85rem, 1.15vw, 1.15rem);
+  line-height: 1;
+  color: rgba(244, 241, 246, .22);
+  transition: color .18s ease, transform .18s ease;
+}
+.swara .glyph {
+  position: relative;
+  font-style: normal;
+  padding: 0 1px;
+}
+/* komal takes a line beneath, tivra a stroke above */
+.swara.komal .glyph { border-bottom: 1px solid currentColor; }
+.swara.tivra .glyph::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -.42em;
+  width: 1px;
+  height: .32em;
+  background: currentColor;
+}
+.swara::after {
+  content: "";
+  width: 12px;
+  height: 1px;
+  background: currentColor;
+  opacity: .5;
+}
+.swara.on {
+  color: var(--accent);
+  transform: translateX(-6px);
+}
+.swara.on::after { width: 30px; opacity: 1; box-shadow: 0 0 12px var(--accent); }
+
+/* ── Index ──────────────────────────────────────────────────── */
+
+.index {
+  position: fixed;
+  left: var(--gutter);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 40;
+}
+.index ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(.9rem, 2.4vh, 1.6rem);
+}
+.index a {
+  display: flex;
+  align-items: baseline;
+  gap: .55rem;
+  text-decoration: none;
+  color: rgba(244, 241, 246, .3);
+  transition: color .25s ease, opacity .25s ease;
+}
+.index a:hover, .index a:focus-visible { color: var(--bright); }
+.index-dev { font-family: var(--dev); font-size: .9rem; }
+.index-rom {
+  font-size: .58rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity .25s ease, transform .25s ease;
+}
+.index a:hover .index-rom, .index a.current .index-rom { opacity: .55; transform: none; }
+.index a.current { color: var(--bright); }
+
+/* ── Gate ───────────────────────────────────────────────────── */
+
+.gate {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(110% 80% at 50% 45%, #150f24 0%, #05050a 68%);
+  padding: var(--gutter);
+  transition: opacity .8s ease, visibility .8s;
+}
+.gate.gone { opacity: 0; visibility: hidden; }
+
+.gate-inner { max-width: 42rem; text-align: center; }
+
+.gate-eyebrow {
+  margin: 0 0 clamp(1.4rem, 4vh, 2.6rem);
+  font-size: .64rem;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: rgba(244, 241, 246, .34);
+}
+.gate-title {
+  font-family: var(--dev);
+  font-weight: 300;
+  font-size: clamp(4.5rem, 17vw, 11rem);
+  line-height: .9;
+  margin: 0;
+  color: var(--bright);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .4rem;
+}
+.gate-title-rom {
+  font-family: var(--display);
+  font-style: italic;
+  font-size: clamp(1.1rem, 2.6vw, 1.9rem);
+  letter-spacing: .16em;
+  color: #e8a33d;
+}
+.gate-note {
+  margin: clamp(1.6rem, 4.5vh, 2.8rem) auto 0;
+  max-width: 34rem;
+  font-size: clamp(.76rem, .95vw, .88rem);
+  line-height: 1.75;
+  color: rgba(244, 241, 246, .5);
+}
+.gate-button {
+  margin-top: clamp(1.8rem, 4.5vh, 2.8rem);
+  display: inline-flex;
+  align-items: center;
+  gap: .8rem;
+  padding: .95rem 2.4rem;
+  border: 1px solid rgba(232, 163, 61, .5);
+  border-radius: 999px;
+  background: transparent;
+  color: #e8a33d;
+  font-family: var(--mono);
+  font-size: .72rem;
+  letter-spacing: .26em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background .3s ease, color .3s ease, border-color .3s ease;
+}
+.gate-button:hover, .gate-button:focus-visible {
+  background: #e8a33d;
+  border-color: #e8a33d;
+  color: #0a0710;
+}
+.gate-button-arrow { transition: transform .3s ease; }
+.gate-button:hover .gate-button-arrow { transform: translateY(3px); }
+.gate-fine {
+  margin: 1.6rem 0 0;
+  font-size: .6rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: rgba(244, 241, 246, .22);
+}
+
+/* ── Hint ───────────────────────────────────────────────────── */
+
+.hint {
+  position: fixed;
+  left: 50%;
+  bottom: clamp(6rem, 17vh, 9.5rem);
+  transform: translateX(-50%);
+  margin: 0;
+  padding: .55rem 1.3rem;
+  border: 1px solid var(--hair);
+  border-radius: 999px;
+  font-size: .6rem;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  color: rgba(244, 241, 246, .45);
+  background: rgba(7, 7, 11, .7);
+  backdrop-filter: blur(8px);
+  pointer-events: none;
+  z-index: 30;
+  transition: opacity .6s ease;
+}
+.hint.gone { opacity: 0; }
+
+/* ── Focus ──────────────────────────────────────────────────── */
+
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--accent, #e8a33d);
+  outline-offset: 4px;
+}
+
+/* ── Narrow screens ─────────────────────────────────────────── */
+
+@media (max-width: 780px) {
+  /* Symmetric padding, so the instrument centres on the screen and not in a
+     box that has been shortened on one side. The index floats clear of it. */
+  .stage {
+    padding-left: var(--gutter);
+    padding-right: var(--gutter);
+  }
+  .index { left: auto; right: .4rem; }
+  .index-dev { font-size: .72rem; }
+  .index-rom { display: none; }
+  .rail { display: none; }
+  .meta-desc { display: none; }
+  .meta { gap: .35rem; }
+  .meta-top { flex-direction: column; align-items: flex-start; }
+  .reel { overflow-x: hidden; }
+
+  .figure {
+    padding-right: 0;
+    overflow: hidden;
+    container-type: size;       /* so the instrument can be sized off this box */
+  }
+
+  /* Portrait: the instrument stands upright and runs the height of the space
+     it actually has — the figure, not the viewport. The header and footer take
+     a bite out of the screen, and the footer's height changes with wrapping,
+     so viewport units overshoot and the ends get clipped. */
+  .instrument {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 68vh;                /* fallback where container units are missing */
+    height: 84vw;
+    width: 94cqh;
+    height: 88cqw;
+    max-height: none;
+    transform: translate(-50%, -50%) rotate(var(--tilt)) scale(var(--zoom));
+  }
+  /* the instructions along the foot say this already, and the pill lands on
+     top of them once they wrap */
+  .hint { display: none; }
+  #sitar   .instrument { --tilt: 86deg; --zoom: 1; }
+  #bansuri .instrument { --tilt: 92deg; --zoom: 1; }
+  #sarangi .instrument { --tilt: 88deg; --zoom: 1; }
+  #shehnai .instrument { --tilt: 94deg; --zoom: 1; }
+}
+
+/* Nothing hovers on a touch screen, so that instruction only costs a line of
+   the height the instrument needs. */
+@media (hover: none) and (max-width: 780px) {
+  .meta-play span:first-child { display: none; }
+}
+
+@media (max-height: 560px) {
+  .meta-desc, .rail { display: none; }
+}
+
+/* ── Reduced motion ─────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+  .reel { scroll-behavior: auto; }
+}
