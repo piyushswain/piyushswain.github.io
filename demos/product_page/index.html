@@ -1,0 +1,373 @@
+---
+# No layout: standalone product page. Empty front matter only so Jekyll
+# runs this through Liquid and the analytics include resolves.
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Griffin P1 — the handheld built to outrun the pack</title>
+<meta name="description" content="Griffin P1: a 120Hz OLED handheld with custom Griffin G1 silicon, Hall-effect sticks and GriffinOS. Concept product page demo built with Three.js.">
+<meta name="theme-color" content="#0b0906" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f6efe4" media="(prefers-color-scheme: light)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200;400;600;700;900&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+{% include analytics.html %}
+</head>
+<body data-theme="dark">
+
+<canvas id="orbit-field" aria-hidden="true"></canvas>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="nav" id="top">
+  <a class="nav-mark" href="#top">
+    GRIFFIN <span class="nav-mark-p1">P1</span>
+  </a>
+  <nav class="nav-links" aria-label="Primary">
+    <a href="#design">Design</a>
+    <a href="#griffinos">GriffinOS</a>
+    <a href="#library">Library</a>
+    <a href="#reserve">Reserve</a>
+  </nav>
+  <div class="nav-actions">
+    <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false" aria-label="Switch to light mode">
+      <span class="theme-toggle-track">
+        <span class="theme-toggle-thumb" aria-hidden="true">
+          <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.8 6.8 0 0 0 10.5 10.5Z"/></svg>
+        </span>
+      </span>
+    </button>
+    <a class="btn btn-ember" href="#reserve">Reserve</a>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============================== HERO ============================== -->
+  <section class="hero" id="hero">
+    <div class="hero-inner">
+      <p class="eyebrow">HANDHELD · GRIFFIN P1 · FIRST FLIGHT 2026</p>
+      <h1 class="hero-title">
+        <span class="hero-title-line">Talons out</span>
+        <span class="hero-title-line hero-title-accent">Gamers First</span>
+      </h1>
+      <p class="hero-sub">A handheld built around one obsession, nothing between your thumb and the game.</p>
+      <div class="hero-cta">
+        <a class="btn btn-ember btn-lg" href="#reserve">Reserve yours</a>
+        <a class="btn btn-ghost btn-lg" href="#griffinos">See it fly ↓</a>
+      </div>
+    </div>
+
+    <div class="hero-device-wrap">
+      <div class="device" id="heroDevice">
+        <span class="shoulder shoulder-l" aria-hidden="true"></span>
+        <span class="shoulder shoulder-r" aria-hidden="true"></span>
+        <div class="device-body">
+          <div class="device-controls device-controls-left" aria-hidden="true">
+            <span class="stick"></span>
+            <span class="dpad"></span>
+            <span class="touchpad"></span>
+          </div>
+
+          <div class="device-screen-bezel">
+            <div class="device-vents" aria-hidden="true"></div>
+            <div class="device-screen" id="deviceScreen">
+              <canvas id="gameCanvas" width="480" height="300"></canvas>
+              <p class="device-now-playing" id="deviceNowPlaying">Ember Run</p>
+            </div>
+          </div>
+
+          <div class="device-controls device-controls-right" aria-hidden="true">
+            <span class="face-buttons"><i></i><i></i><i></i><i></i></span>
+            <span class="stick"></span>
+            <span class="touchpad"></span>
+          </div>
+        </div>
+        <div class="device-glow" aria-hidden="true"></div>
+      </div>
+    </div>
+
+    <ul class="spec-ticker" aria-label="Key specifications">
+      <li>30Hz - 120Hz</li>
+      <li>9 hr flight time</li>
+      <li>Hall-effect sticks</li>
+      <li>512GB storage</li>
+      <li>Cartridge + cloud</li>
+      <li>Griffin G1 chip</li>
+      <li>289g</li>
+    </ul>
+  </section>
+
+  <p class="hero-sub" style="max-width: 50rem;text-align: center;">Custom silicon, a 7&Prime; OLED panel, and a shell milled to disappear in your hands.</p>
+
+  <!-- ============================ FEATURES ============================ -->
+  <section class="features" id="design">
+    <div class="section-head">
+      <p class="eyebrow">DESIGN</p>
+      <h2 class="section-title">By Gamers, For Gamers.</h2>
+    </div>
+
+    <div class="carousel" id="carousel">
+      <button class="carousel-nav carousel-nav-prev" id="carPrev" type="button" aria-label="Previous feature">‹</button>
+      <div class="carousel-track" id="carTrack" tabindex="0" aria-label="Feature carousel">
+
+        <article class="feature-card">
+          <span class="feature-icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48"><rect x="8" y="6" width="32" height="36" rx="4"/><path d="M16 38h16"/></svg>
+          </span>
+          <h3>Display</h3>
+          <p>7&Prime; 120Hz OLED Gorilla&nbsp;Glass Victus panel, cranked to 1200 nits, so you can continue playing outdoors.</p>
+        </article>
+
+        <article class="feature-card">
+          <span class="feature-icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48"><rect x="14" y="14" width="20" height="20" rx="2"/><path d="M20 6v8M28 6v8M20 34v8M28 34v8M6 20h8M6 28h8M34 20h8M34 28h8"/></svg>
+          </span>
+          <h3>Griffin G1 silicon</h3>
+          <p>Custom 8-core chip with hardware ray tracing, tuned for performance and efficiency.</p>
+        </article>
+
+        <article class="feature-card">
+          <span class="feature-icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="11"/><circle cx="24" cy="24" r="3" fill="currentColor" stroke="none"/></svg>
+          </span>
+          <h3>Hall-effect sticks</h3>
+          <p>Magnetic hall-effect, zero mechanical wear. No drift by design, not a promise we patch in later.</p>
+        </article>
+
+        <article class="feature-card">
+          <span class="feature-icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48"><rect x="14" y="6" width="20" height="36" rx="3"/><path d="M19 14h10"/></svg>
+          </span>
+          <h3>Battery</h3>
+          <p>9 hours at full tilt, 80W fast charge, and a pack that swaps in seconds when you're between flights.</p>
+        </article>
+
+        <article class="feature-card">
+          <span class="feature-icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48"><path d="M10 30c4-14 24-14 28 0"/><path d="M6 34c6-18 30-18 36 0"/></svg>
+          </span>
+          <h3>Thermals</h3>
+          <p>Vapor-chamber cooling and dual fans quiet enough that headphones aren't a requirement, just a preference.</p>
+        </article>
+
+        <article class="feature-card">
+          <span class="feature-icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48"><path d="M6 20v8h6l10 8V12l-10 8Z"/><path d="M30 18c3 3 3 9 0 12M35 13c6 6 6 16 0 22"/></svg>
+          </span>
+          <h3>Sound</h3>
+          <p>Dual 3W drivers tuned by ear, spatial audio over Bluetooth 5.3, built to be deliver immersion.</p>
+        </article>
+
+      </div>
+      <button class="carousel-nav carousel-nav-next" id="carNext" type="button" aria-label="Next feature">›</button>
+    </div>
+    <div class="carousel-dots" id="carDots" role="tablist" aria-label="Feature slide"></div>
+  </section>
+
+  <!-- ============================ GRIFFINOS ============================ -->
+  <section class="griffinos" id="griffinos">
+    <div class="section-head">
+      <p class="eyebrow">SOFTWARE</p>
+      <h2 class="section-title">GriffinOS. Built for Gaming.</h2>
+    </div>
+
+    <div class="os-panel">
+      <ul class="os-features" id="osFeatures" role="tablist" aria-label="GriffinOS features">
+        <li>
+          <button class="os-feature active" data-screen="home" role="tab" aria-selected="true" type="button">
+            <span class="os-feature-icon" aria-hidden="true">⌂</span>
+            <span class="os-feature-copy">
+              <span class="os-feature-title">Home</span>
+              <span class="os-feature-desc">One shelf for everything you're playing right now.</span>
+            </span>
+          </button>
+        </li>
+        <li>
+          <button class="os-feature" data-screen="resume" role="tab" aria-selected="false" type="button">
+            <span class="os-feature-icon" aria-hidden="true">⏵</span>
+            <span class="os-feature-copy">
+              <span class="os-feature-title">Quick Resume</span>
+              <span class="os-feature-desc">Jump back into any of upto four suspended games, instantly.</span>
+            </span>
+          </button>
+        </li>
+        <li>
+          <button class="os-feature" data-screen="library" role="tab" aria-selected="false" type="button">
+            <span class="os-feature-icon" aria-hidden="true">▦</span>
+            <span class="os-feature-copy">
+              <span class="os-feature-title">Universal Library</span>
+              <span class="os-feature-desc">Cartridges, downloads and streamed titles, one shelf.</span>
+            </span>
+          </button>
+        </li>
+        <li>
+          <button class="os-feature" data-screen="perf" role="tab" aria-selected="false" type="button">
+            <span class="os-feature-icon" aria-hidden="true">◐</span>
+            <span class="os-feature-copy">
+              <span class="os-feature-title">Performance Modes</span>
+              <span class="os-feature-desc">Silent, Balanced or Unleashed, switch mid-game.</span>
+            </span>
+          </button>
+        </li>
+        <li>
+          <button class="os-feature" data-screen="sync" role="tab" aria-selected="false" type="button">
+            <span class="os-feature-icon" aria-hidden="true">⇅</span>
+            <span class="os-feature-copy">
+              <span class="os-feature-title">Cloud Sync</span>
+              <span class="os-feature-desc">Saves follow you between the handheld and your devices.</span>
+            </span>
+          </button>
+        </li>
+      </ul>
+
+      <div class="os-device">
+        <div class="os-frame">
+          <div class="os-screen" id="osScreen" data-screen="home">
+
+            <div class="os-view os-view-home" data-view="home">
+              <div class="os-statusbar"><span>GRIFFINOS</span><span>19:41 · 82%</span></div>
+              <p class="os-view-label">Continue playing</p>
+              <div class="os-tile os-tile-wide"><span>Ember Run</span><i>▶</i></div>
+              <div class="os-tile-row">
+                <div class="os-tile"><span>Talon Trials</span></div>
+                <div class="os-tile"><span>Canyon Drift</span></div>
+              </div>
+            </div>
+
+            <div class="os-view os-view-resume" data-view="resume">
+              <div class="os-statusbar"><span>QUICK RESUME</span><span>4 suspended</span></div>
+              <div class="os-resume-row"><span>Ember Run</span><em>62% zone 3</em></div>
+              <div class="os-resume-row"><span>Talon Trials</span><em>paused · boss</em></div>
+              <div class="os-resume-row"><span>Canyon Drift</span><em>lap 4 of 6</em></div>
+              <div class="os-resume-row"><span>Nightglass</span><em>chapter 2</em></div>
+            </div>
+
+            <div class="os-view os-view-library" data-view="library">
+              <div class="os-statusbar"><span>LIBRARY</span><span>128 titles</span></div>
+              <div class="os-lib-tabs"><span class="on">All</span><span>Cartridge</span><span>Cloud</span></div>
+              <div class="os-lib-grid" id="osLibGrid"></div>
+            </div>
+
+            <div class="os-view os-view-perf" data-view="perf">
+              <div class="os-statusbar"><span>PERFORMANCE</span><span>Live</span></div>
+              <div class="os-perf-modes">
+                <button class="os-perf-mode" data-mode="silent">Silent<em>18W</em></button>
+                <button class="os-perf-mode active" data-mode="balanced">Balanced<em>28W</em></button>
+                <button class="os-perf-mode" data-mode="unleashed">Unleashed<em>42W</em></button>
+              </div>
+              <div class="os-perf-meter"><span id="osPerfFill"></span></div>
+              <p class="os-perf-readout"><span id="osPerfFps">60</span> fps target</p>
+            </div>
+
+            <div class="os-view os-view-sync" data-view="sync">
+              <div class="os-statusbar"><span>CLOUD SYNC</span><span>Up to date</span></div>
+              <div class="os-sync-row"><span>Ember Run</span><i class="os-sync-ok">✓ synced</i></div>
+              <div class="os-sync-row"><span>Talon Trials</span><i class="os-sync-ok">✓ synced</i></div>
+              <div class="os-sync-row"><span>Canyon Drift</span><i class="os-sync-busy">syncing…</i></div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ LIBRARY ============================ -->
+  <section class="library" id="library">
+    <div class="section-head">
+      <p class="eyebrow">LIBRARY</p>
+      <h2 class="section-title">Everything you already play.</h2>
+      <p class="section-sub">128 titles at launch — cartridge, download or streamed, one shelf either way.</p>
+    </div>
+
+    <div class="library-panel">
+      <div class="icon-row">
+        <div class="icon-track" id="libraryRowA"></div>
+      </div>
+      <div class="icon-row icon-row-reverse">
+        <div class="icon-track" id="libraryRowB"></div>
+      </div>
+      <div class="icon-row">
+        <div class="icon-track" id="libraryRowC"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ RESERVE ============================ -->
+  <section class="reserve" id="reserve">
+    <div class="section-head">
+      <p class="eyebrow">RESERVE</p>
+      <h2 class="section-title">Join the flight line.</h2>
+      <p class="section-sub">Griffin P1 ships first to the flight line. Reserve a unit, no payment now.</p>
+    </div>
+
+    <div class="reserve-panel">
+      <form class="reserve-form" id="reserveForm" novalidate>
+        <div class="field">
+          <label for="rName">Name</label>
+          <input id="rName" name="name" type="text" autocomplete="name" placeholder="Your name" required>
+          <p class="field-error" id="rNameError" role="alert"></p>
+        </div>
+        <div class="field">
+          <label for="rEmail">Email</label>
+          <input id="rEmail" name="email" type="email" autocomplete="email" placeholder="you@domain.com" required>
+          <p class="field-error" id="rEmailError" role="alert"></p>
+        </div>
+        <div class="field">
+          <label for="rRegion">Region</label>
+          <select id="rRegion" name="region">
+            <option selected>India</option>
+            <option>Asia</option>
+            <option>Rest of world</option>
+          </select>
+        </div>
+        <label class="field-check">
+          <input class="field-check-input" type="checkbox" id="rBeta" name="beta">
+          <span class="field-check-box" aria-hidden="true">
+            <svg viewBox="0 0 16 16"><path d="M3 8.3l3.2 3L13 4.3"/></svg>
+          </span>
+          <span class="field-check-label">Count me in as a beta tester too</span>
+        </label>
+        <button class="btn btn-ember btn-lg reserve-submit" type="submit">Reserve my P1</button>
+        <p class="reserve-fine">Submit the form to view the invitation card</p>
+        <p class="reserve-fine">This is a portfolio project, not a real store. Nothing is stored beyond this page.</p>
+      </form>
+
+      <div class="boarding-pass" id="boardingPass" hidden>
+        <div class="boarding-pass-claws" aria-hidden="true"><span></span><span></span><span></span></div>
+        <div class="boarding-pass-top">
+          <span class="boarding-pass-mark">GRIFFIN P1</span>
+          <span class="boarding-pass-status">CONFIRMED</span>
+        </div>
+        <p class="boarding-pass-headline">You're on the manifest.</p>
+        <dl class="boarding-pass-grid">
+          <div><dt>Flyer</dt><dd id="bpName">—</dd></div>
+          <div><dt>Position</dt><dd id="bpNumber">—</dd></div>
+          <div><dt>Route</dt><dd id="bpRegion">—</dd></div>
+          <div><dt>Class</dt><dd id="bpClass">—</dd></div>
+        </dl>
+        <div class="boarding-pass-barcode" aria-hidden="true"></div>
+        <button class="btn btn-ghost" id="bpReset" type="button">Reserve another</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <span class="footer-mark">GRIFFIN P1</span>
+    <p class="footer-note">Concept product page | a design &amp; Three.js demo, not a real device or store. Built by <a href="/">Piyush Swain</a>.</p>
+    <a class="footer-back" href="/">← Back to piyushswain.github.io</a>
+  </div>
+</footer>
+
+<script type="module" src="main.js"></script>
+</body>
+</html>
